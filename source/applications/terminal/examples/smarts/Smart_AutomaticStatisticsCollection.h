@@ -5,10 +5,11 @@
  */
 
 /* 
- * File:   Smart_AutomaticStatisticsCollection.h
- * Author: rlcancian
- *
- * Created on 3 de Setembro de 2019, 18:34
+ * File:   Smart_AutomaticStatisticsCollection.cpp
+ * Authors: Igor May Wensing
+ *          Isac Campos
+ * 
+ * Created on 11 de Dezembro de 2022, 11:14
  */
 
 #ifndef Smart_AutomaticStatisticsCollection_H
@@ -24,4 +25,3 @@ public:
 };
 
 #endif /* Smart_AutomaticStatisticsCollection_H */
-

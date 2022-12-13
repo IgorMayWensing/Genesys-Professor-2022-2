@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=2019_2022_GenESyS
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/2019_2022_GenESyS
+CND_ARTIFACT_NAME_Debug=Genesys-Professor-2022-2
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/Genesys-Professor-2022-2
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=20192022GenESyS.deb
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/20192022GenESyS.deb
+CND_PACKAGE_NAME_Debug=Genesys-Professor-2022-2.deb
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/Genesys-Professor-2022-2.deb
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=2019_2022_GenESyS
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/2019_2022_GenESyS
+CND_ARTIFACT_NAME_Release=Genesys-Professor-2022-2
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/Genesys-Professor-2022-2
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=20192022GenESyS.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/20192022GenESyS.tar
+CND_PACKAGE_NAME_Release=Genesys-Professor-2022-2.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/Genesys-Professor-2022-2.tar
 #
 # include compiler specific variables
 #

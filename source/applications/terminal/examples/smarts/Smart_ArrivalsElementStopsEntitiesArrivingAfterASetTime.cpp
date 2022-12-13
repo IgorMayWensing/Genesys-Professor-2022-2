@@ -20,7 +20,8 @@
 
 // Model Components
 #include "../../../../plugins/components/Create.h"
-#include "../../../../plugins/components/DummyComponent.h"
+#include "../../../../plugins/components/Assign.h"
+#include "../../../../plugins/data/Station.h"
 #include "../../../../plugins/components/Dispose.h"
 
 Smart_ArrivalsElementStopsEntitiesArrivingAfterASetTime::Smart_ArrivalsElementStopsEntitiesArrivingAfterASetTime() {
@@ -37,13 +38,23 @@ int Smart_ArrivalsElementStopsEntitiesArrivingAfterASetTime::main(int argc, char
 	// crete model
 	Model* model = genesys->getModels()->newModel();
 	PluginManager* plugins = genesys->getPlugins();
-	Create* create1 = plugins->newInstance<Create>(model);
-	DummyComponent* dummy1 = plugins->newInstance<DummyComponent>(model);
+	
+        Station* station = plugins->newInstance<Create>(model);
+        station->setName("Back Entrance");
+        //como usar esse station?
+        
+        Assign* assign2 = plugins->newInstance<Assign>(model);
+        //assign2->
+        
 	Dispose* dispose1 = plugins->newInstance<Dispose>(model);
-	// connect model components to create a "workflow"
-	create1->getConnections()->insert(dummy1);
+	
+        
+        
+        // connect model components to create a "workflow"
+	station->getConnections()->insert(assign2);
 	dummy1->getConnections()->insert(dispose1);
-	// set options, save and simulate
+	
+        // set options, save and simulate
 	model->getSimulation()->setReplicationLength(60, Util::TimeUnit::second);
 	model->save("./models/Smart_ArrivalsElementStopsEntitiesArrivingAfterASetTime.gen");
 	model->getSimulation()->start();
@@ -52,4 +63,3 @@ int Smart_ArrivalsElementStopsEntitiesArrivingAfterASetTime::main(int argc, char
 	delete genesys;
 	return 0;
 };
-

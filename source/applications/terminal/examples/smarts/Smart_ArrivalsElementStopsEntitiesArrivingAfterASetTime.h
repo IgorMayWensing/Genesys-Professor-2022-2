@@ -24,4 +24,3 @@ public:
 };
 
 #endif /* Smart_ArrivalsElementStopsEntitiesArrivingAfterASetTime_H */
-

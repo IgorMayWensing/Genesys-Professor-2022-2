@@ -43,40 +43,27 @@ int Smart_EvaluatingConditionsBeforeEnteringQueue::main(int argc, char** argv) {
         // crete model
 	Model* model = genesys->getModels()->newModel();
 	PluginManager* plugins = genesys->getPlugins();
-        
-        Variable* procStartTime = plugins->newInstance<Variable>(model, "procstarttime");
-        Variable* procTime      = plugins->newInstance<Variable>(model, "proctime");
 	
-        EntityType* entityType = plugins->newInstance<EntityType>(model, "Entity 1");
         
         Create* create = plugins->newInstance<Create>(model, "Create Entity");
-        create->setEntityType(entityType);
-        create->setTimeBetweenCreationsExpression("60");
+        create->setTimeBetweenCreationsExpression(60);
         create->setTimeUnit(Util::TimeUnit::minute);
         create->setEntitiesPerCreation(1);
         create->setFirstCreation(0);
-//        create->setMaxCreations(INFINITY);
+        //create->setMaxCreations(INFINITY);
         
-        Attribute* timeIn = plugins->newInstance<Attribute>(model, "Time_In");
+        Assign* assign1 = plugins->newInstance<Assign>(model, "Assign attribute time in equal to current time variable TNOW");
         
-        Assign* assign1        = plugins->newInstance<Assign>(model, "Assign attribute time in equal to current time variable TNOW");
-        assign1->getAssignments()->insert(new Assignment(model, "Time_In", "TNOW"));
-        
-        std::string timeGoneBy        = "(TNOW - procstarttime)";
-        std::string remainingProcTime = "mx(0, proctime - " + timeGoneBy + ")";
         Decide* decide = plugins->newInstance<Decide>(model, "Is the remaining process time less than 20?");
-        decide->getConditions()->insert(remainingProcTime + " < 20");
         
         Process* process1 = plugins->newInstance<Process>(model, "Begin processing by seizing resource");
         
-        Assign* assign2        = plugins->newInstance<Assign>(model, "Assign variables Procstarttime and Proctime");
-        assign2->getAssignments()->insert(new Assignment(model, "procstarttime", "TNOW", false));
-        assign2->getAssignments()->insert(new Assignment(model, "proctime", "expo(480)", false));
+        Assign* assign2 = plugins->newInstance<Assign>(model, "Assign variables Procstarttime and Proctime");
         
-//        Process* process2 = plugins->newInstance<Process>(model, "Begin processing delay then release resource");
-//	
-//	Dispose* disposeTrue  = plugins->newInstance<Dispose>(model, "Dispose of entity");
-//        Dispose* disposeFalse = plugins->newInstance<Dispose>(model, "Dispose of entity if condition not met");
+        Process* process2 = plugins->newInstance<Process>(model, "Begin processing delay then release resource");
+	
+	Dispose* disposeTrue  = plugins->newInstance<Dispose>(model, "Dispose of entity");
+        Dispose* disposeFalse = plugins->newInstance<Dispose>(model, "Dispose of entity if condition not met");
 	
         
         // connect model components to create a "workflow"
@@ -93,4 +80,3 @@ int Smart_EvaluatingConditionsBeforeEnteringQueue::main(int argc, char** argv) {
 	delete genesys;
 	return 0;
 };
-

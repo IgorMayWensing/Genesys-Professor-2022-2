@@ -20,7 +20,7 @@
 
 // Model Components
 #include "../../../../plugins/components/Create.h"
-#include "../../../../plugins/components/Separate.h"
+#include "../../../../plugins/components/Clone.h"
 #include "../../../../plugins/components/Process.h"
 #include "../../../../plugins/components/Dispose.h"
 
@@ -42,24 +42,15 @@ int Smart_DefiningResourceCapacity::main(int argc, char** argv) {
 	PluginManager* plugins = genesys->getPlugins();
 	
         Create* create = plugins->newInstance<Create>(model);
+        create->setTimeBetweenCreationsExpression("exp(3)");
         create->setTimeUnit(Util::TimeUnit::minute);
         create->setEntitiesPerCreation(1);  // igual EntitiesPerArrival?
         create->setFirstCreation(0);
         //create->setMaxCreations(INFINITY);
         
         Separate* separate1 = plugins->newInstance<Separate>(model);
-//        separate1->
-       
-        Resource* bookkeeper = plugins->newInstance<Resource>(model, "Bookkeeper");
-        bookkeeper->setCapacity(1);
-        bookkeeper->setCostBusyHour(0);
-        bookkeeper->isReportStatistics();
-        
-        Resource* bookkeeper2 = plugins->newInstance<Resource>(model, "Bookkeeper2");
-        bookkeeper2->setCapacity(4);
-        bookkeeper2->setCostBusyHour(0);
-        bookkeeper2->isReportStatistics();
-        
+        separate1->
+	
 	Process* process1 = plugins->newInstance<Process>(model);
         process1->getSeizeRequests()->insert(new SeizableItem(plugins->newInstance<Resource>(model)));
 	process1->setQueueableItem(new QueueableItem(plugins->newInstance<Queue>(model)));
@@ -93,7 +84,10 @@ int Smart_DefiningResourceCapacity::main(int argc, char** argv) {
 	
         
         // set options, save and simulate
-	model->getSimulation()->setReplicationLength(60, Util::TimeUnit::second);
+        ModelSimulation* sim = model->getSimulation();
+        
+        sim->setTerminatingCondition("count(Dispose_1.CountNumberIn)>1000");
+	sim->setReplicationLength(60, Util::TimeUnit::second);
 	model->save("./models/Smart_DefiningResourceCapacity.gen");
 	model->getSimulation()->start();
         
@@ -101,4 +95,3 @@ int Smart_DefiningResourceCapacity::main(int argc, char** argv) {
 	delete genesys;
 	return 0;
 };
-

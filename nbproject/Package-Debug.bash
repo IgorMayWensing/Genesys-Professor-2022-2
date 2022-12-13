@@ -13,8 +13,8 @@ CND_BUILDDIR=build
 CND_DLIB_EXT=so
 NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/2019_2022_GenESyS
-OUTPUT_BASENAME=2019_2022_GenESyS
+OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/Genesys-Professor-2022-2
+OUTPUT_BASENAME=Genesys-Professor-2022-2
 PACKAGE_TOP_DIR=/usr/
 
 # Functions
@@ -411,6 +411,10 @@ cd "${TOP}"
 makeDirectory "${NBTMPDIR}//usr/bin"
 copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}//usr/bin"
+copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
+
 
 # Create control file
 cd "${TOP}"
@@ -432,9 +436,9 @@ dpkg-deb  --build ${TMPDIRNAME}
 checkReturnCode
 cd "${TOP}"
 mkdir -p  ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package
-mv ${NBTMPDIR}.deb ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/20192022GenESyS.deb
+mv ${NBTMPDIR}.deb ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/Genesys-Professor-2022-2.deb
 checkReturnCode
-echo Debian: ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/20192022GenESyS.deb
+echo Debian: ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/Genesys-Professor-2022-2.deb
 
 # Cleanup
 cd "${TOP}"
